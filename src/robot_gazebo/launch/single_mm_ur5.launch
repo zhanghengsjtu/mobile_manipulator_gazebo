@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find robot_gazebo)/worlds/empty.world"/>
+    <arg name="debug" value="false" />
+    <arg name="gui" value="true" />
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="verbose" value="false" />
+  </include>
+
+
+  <arg name="robot1_x" default=" -1.5"/>
+  <arg name="robot1_y" default=" -0.0"/>
+  <!-- <arg name="robot1_y" default=" 0.0736"/> -->
+  <arg name="robot1_z" default=" 0.2"/>
+  <arg name="robot1_yaw"   default=" 0.0"/>
+
+
+  <rosparam command="load" file="$(find robot_gazebo)/config/mm1_pos_controller.yaml" />
+  <rosparam command="load" file="$(find robot_gazebo)/config/mm1_robotiq_controller.yaml" />
+
+  <group ns = "robot1">
+    <!-- robot urdf load -->
+    <param name="robot_description"
+      command="$(find xacro)/xacro '$(find robot_gazebo)/urdf/multiple_agv_ur5_robot1.xacro' --inorder" />
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+
+    <node name="robot_state_publisher"
+          pkg="robot_state_publisher" type="robot_state_publisher"
+          respawn="false" output="screen" />
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner"
+          args="joint_state_controller front_right_controller front_left_controller rear_right_controller rear_left_controller" />
+
+    <!-- <node name="controller_spawner_arm" pkg="controller_manager" type="spawner"
+          args="shoulder_pan_joint_position_controller shoulder_lift_joint_position_controller elbow_joint_position_controller wrist_1_joint_position_controller wrist_2_joint_position_controller wrist_3_joint_position_controller"/> -->
+
+    <node name="controller_spawner_arm" pkg="controller_manager" type="spawner"
+          args="joint_controller"/>
+  
+
+    <node name="controller_spawner_gripper" pkg="controller_manager" type="spawner"
+          args="gripper_controller"/>
+         
+      
+
+    <!-- Spawn robot in gazebo -->
+    <node name="robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+              args="-urdf -param robot_description 
+                    -x $(arg robot1_x)
+                    -y $(arg robot1_y)
+                    -z $(arg robot1_z)
+                    -Y $(arg robot1_yaw)
+                    -model robot1" />
+  </group>
+
+
+
+</launch>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>  
+<robot name="multiple_agv_ur5_robot1" xmlns:xacro="http://ros.org/wiki/xacro">  
+    <xacro:include filename="$(find agv_arm_description)/urdf/agv_ur5.xacro"/>  
+
+<!-- set robot name and joint angle -->
+    <xacro:agv_ur5 prefix1="robot1" prefix2="_"
+                   q1="0.0"
+                   q2="0.0"
+                   q3="0.0"
+                   q4="0.0"
+                   q5="0.0"
+                   q6="0.0" />
+
+</robot>

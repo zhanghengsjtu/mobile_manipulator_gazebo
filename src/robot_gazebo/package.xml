@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_gazebo</name>
+  <version>1.3.0</version>
+  <description>
+    Gazebo simulation package
+  </description>
+  <license>TODO</license>
+  <maintainer email="462922849@qq.com">lwh</maintainer>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>tf</depend>
+  <depend>gazebo_ros</depend>
+  <exec_depend>gazebo</exec_depend>
+  <exec_depend>model_description</exec_depend>
+  <export>
+
+  </export>
+</package>

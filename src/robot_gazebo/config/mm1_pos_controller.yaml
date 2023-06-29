@@ -1,0 +1,94 @@
+# 注意此处的前缀robot2是为了添加ns区分topic的名字，解决控制话题的重名问题
+
+
+robot1/joint_state_controller:
+  type: "joint_state_controller/JointStateController"
+  publish_rate: 50 
+
+
+
+
+
+robot1/front_right_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot1_front_right_wheel_joint  
+
+robot1/front_left_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot1_front_left_wheel_joint  
+
+robot1/rear_right_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot1_rear_right_wheel_joint 
+
+robot1/rear_left_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: robot1_rear_left_wheel_joint  
+
+
+robot1/joint_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - robot1_shoulder_pan_joint
+    - robot1_shoulder_lift_joint
+    - robot1_elbow_joint
+    - robot1_wrist_1_joint
+    - robot1_wrist_2_joint
+    - robot1_wrist_3_joint
+
+# shoulder_pan_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_shoulder_pan_joint
+
+# robot1/shoulder_lift_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_shoulder_lift_joint
+
+# robot1/elbow_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_elbow_joint
+
+# robot1/wrist_1_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_wrist_1_joint
+
+# robot1/wrist_2_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_wrist_2_joint
+  
+# robot1/wrist_3_joint_position_controller:
+#   type: position_controllers/JointPositionController
+#   joint: robot1_wrist_3_joint
+
+
+
+robot1/gazebo_ros_control:
+  pid_gains:
+    robot1_front_right_wheel_joint:
+      p: 10.0
+      i: 0.01
+      d: 0.0
+    robot1_front_left_wheel_joint:
+      p: 10.0
+      i: 0.01
+      d: 0.0
+    robot1_rear_right_wheel_joint:
+      p: 10.0
+      i: 0.01
+      d: 0.0
+    robot1_rear_left_wheel_joint:
+      p: 10.0
+      i: 0.01
+      d: 0.0
+
+
+
+
+
+
+
+
+
+
+
+
